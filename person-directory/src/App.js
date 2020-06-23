@@ -58,6 +58,7 @@ class App extends Component {
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
      </tr>
     </thead>
    <tbody> 
