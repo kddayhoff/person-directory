@@ -53,8 +53,9 @@ class App extends Component {
    {/* table header can be a component here without props b/c it's not getting data */}
      <thead>
       <tr>
-        <th scope="col">Picture</th> 
+        <th scope="col"></th> 
         {/* putimage here */}
+        <th scope="col"></th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
@@ -66,9 +67,11 @@ class App extends Component {
      <PersonComponent 
     //  image here
      key = {person.login.uuid}
+     picture = {person.picture.medium}
      first = {person.name.first}
      last = {person.name.last}
      email ={person.email}
+     phone = {person.phone}
      />
      )
     )}

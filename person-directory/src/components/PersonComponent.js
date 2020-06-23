@@ -4,11 +4,13 @@ import React from "react";
 function PersonComopnent (props){
     return(
   <tr>
-      <th scope="row">Image</th>
+     
+      <img alt={props.picture} className="img-fluid" src={props.picture} style={{ margin: "0 auto" }} />
       <td>{props.first}</td>
       <td>{props.last}</td>
       <td>{props.email}</td>
       <td>{props.phone}</td>
+    
     </tr>
 )}
 
