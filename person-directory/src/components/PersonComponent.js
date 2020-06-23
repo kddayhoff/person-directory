@@ -8,6 +8,7 @@ function PersonComopnent (props){
       <td>{props.first}</td>
       <td>{props.last}</td>
       <td>{props.email}</td>
+      <td>{props.phone}</td>
     </tr>
 )}
 
