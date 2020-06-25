@@ -164,6 +164,7 @@ handleSortByPhone = () => {
     
   return (
   <div>
+    <div className="form-group mx-sm-3 mb-2">
     <input
           onChange={this.handleInputChange}
           value={this.search}
@@ -173,6 +174,7 @@ handleSortByPhone = () => {
           placeholder="Search Person Directory"
           id="search"
         />
+    </div>
     <table className="table table-hover"> 
    {/* table header can be a component here without props b/c it's not getting data */}
      <thead>
