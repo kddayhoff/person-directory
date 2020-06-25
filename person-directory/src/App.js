@@ -30,15 +30,16 @@ class App extends Component {
     );
   };
 
-  // When the form is submitted, search the OMDB API for the value of `this.state.search`
+  // When the form is submitted, search the person directory API for the value of `this.state.search`
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchMovies(this.state.search);
   };
 
   render() {
-  return (<div>
-{/* filter with map */}
+  return (
+  <div>
+   {/* filter with map */}
     <input
           onChange={this.handleInputChange}
           value={this.search}
@@ -49,13 +50,11 @@ class App extends Component {
           placeholder="Search Person Directory"
           id="search"
         />
-    <table class="table"> 
+    <table className="table"> 
    {/* table header can be a component here without props b/c it's not getting data */}
      <thead>
       <tr>
         <th scope="col"></th> 
-        {/* putimage here */}
-        <th scope="col"></th>
         <th scope="col">First</th>
         <th scope="col">Last</th>
         <th scope="col">Email</th>
@@ -63,9 +62,8 @@ class App extends Component {
      </tr>
     </thead>
    <tbody> 
-     { this.state.persons.map(person => (
+     { this.state.persons.filter(person => this.state.search === "" ||person.includes(this.state.input)).map(person => (
      <PersonComponent 
-    //  image here
      key = {person.login.uuid}
      picture = {person.picture.medium}
      first = {person.name.first}
@@ -76,9 +74,7 @@ class App extends Component {
      )
     )}
    </tbody>
-  </table>
-
-    
+  </table>    
   </div>)
       
   }}
