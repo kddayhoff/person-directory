@@ -75,6 +75,30 @@ const descComparedByEmail=  function(a, b) {
   return 0;
 }
 
+const ascComparedByPhone=  function(a, b) {
+  let phoneA = a.phone.toUpperCase();
+  let phoneB = b.phone.toUpperCase();
+  if (phoneA < phoneB) {
+    return -1;
+  }
+  if (phoneA > phoneB) {
+    return 1;
+  }
+  return 0;
+}
+
+const descComparedByPhone=  function(a, b) {
+  let phoneA = a.phone.toUpperCase();
+  let phoneB = b.phone.toUpperCase();
+  if (phoneA < phoneB) {
+    return 1;
+  }
+  if (phoneA > phoneB) {
+    return -1;
+  }
+  return 0;
+}
+
 // state is used when data is going to change, usually through user interaction - 
 class App extends Component {
   state = {
@@ -128,15 +152,19 @@ handleSortByEmail = () => {
     persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascComparedByEmail: descComparedByEmail)}) 
 }
 
+handleSortByPhone = () => {
+  this.setState({
+    sortOrder: this.state.sortOrder === "ASC" ? "DSC" : "ASC", 
+    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascComparedByPhone: descComparedByPhone)}) 
+}
+
   render() {
     let searchVal = this.state.search.toLowerCase();
   return (
   <div>
-   {/* filter with map */}
     <input
           onChange={this.handleInputChange}
           value={this.search}
-          // match state key to inut name
           name="search"
           type="text"
           className="form-control"
@@ -151,7 +179,7 @@ handleSortByEmail = () => {
         <th scope="col" onClick={this.handleSortByFirstName}>First</th>
         <th scope="col" onClick={this.handleSortByLastName}>Last</th>
         <th scope="col" onClick={this.handleSortByEmail}>Email</th>
-        <th scope="col">Phone Number</th>
+        <th scope="col" onClick={this.handleSortByPhone}>Phone Number</th>
      </tr>
     </thead>
    <tbody> 
