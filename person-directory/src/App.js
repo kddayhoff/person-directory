@@ -3,30 +3,27 @@ import React, { Component } from "react";
 import API from "./utils/API";
 
 
-//third param in function to search by specific key, reps whatever key in the column we want to search --cleaning the array/filter data 
-//const newPersonKey = function ()
-
-const ascCompareByName =  function(a, b, newPersonKey) {
- //sort by first name ascending  --> to descend switch -1 and 1
-  if (a[newPersonKey].toUpperCase() < b[newPersonKey].toUpperCase()) {
+const ascCompareByName =  function(a, b) {
+  let firstNameA = a.name.first.toUpperCase();
+  let firstNameB = b.name.first.toUpperCase();
+  if (firstNameA < firstNameB) {
     return -1;
   }
-  if (a[newPersonKey].toUpperCase() > b[newPersonKey].toUpperCase()) {
+  if (firstNameA > firstNameB) {
     return 1;
   }
-  // names must be equal
   return 0;
 }
 
-const descCompareByName =  function(a, b, newPersonKey) {
-  //sort by first name ascending  --> to descend switch -1 and 1
-   if (a[newPersonKey].toUpperCase() < b[newPersonKey].toUpperCase()) {
+const descCompareByName =  function(a, b) {
+  let firstNameA = a.name.first.toUpperCase();
+  let firstNameB = b.name.first.toUpperCase();
+   if (firstNameA < firstNameB) {
      return 1;
    }
-   if (a[newPersonKey].toUpperCase() > b[newPersonKey].toUpperCase()) {
+   if (firstNameA > firstNameB) {
      return -1;
    }
-   // names must be equal
    return 0;
  }
 
@@ -43,14 +40,7 @@ class App extends Component {
     API.search()
     .then(res => { 
       console.log(res); 
-      this.setState({ persons: res.data.results.map(person => ( {
-        first: person.name.first,
-        last: person.name.last,
-        
-
-      })) })
-      //////////////////////////////////////////////
-      //map by result from keys from table needed --- this will essentiall become our newPersonKey
+      this.setState({ persons: res.data.results })
     })
     .catch(err => console.log(err));
   }
@@ -72,11 +62,10 @@ class App extends Component {
     this.searchMovies(this.state.search);
   };
   
-  handleSortBy = (sortKey) => {
+  handleSortByPerson = () => {
   this.setState({
-    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? (a, b) => ascCompareByName(a, b, sortKey) : (a, b)=> descCompareByName(a, b, sortKey)),
     sortOrder: this.state.sortOrder === "ASC" ? "DSC" : "ASC", 
-  }) 
+    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascCompareByName : descCompareByName)}) 
 }
 
   render() {
@@ -99,9 +88,9 @@ class App extends Component {
      <thead>
       <tr>
         <th scope="col"></th> 
-        <th scope="col" onClick={this.handleSortBy("first")}>First</th>
+        <th scope="col" onClick={this.handleSortByPerson}>First</th>
         <th scope="col">Last</th>
-        <th scope="col" onClick={this.handleSortBy("email")}>Email</th>
+        <th scope="col">Email</th>
         <th scope="col">Phone Number</th>
      </tr>
     </thead>
