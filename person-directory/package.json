@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://kddayhoff.github.io/person-directory/",
   "dependencies": {
+    "@material-ui/core": "^4.10.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -13,7 +14,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
   },
-  "scripts": { 
+  "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages master -d build",
     "start": "react-scripts start",

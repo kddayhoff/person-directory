@@ -140,6 +140,7 @@ class App extends Component {
     persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascCompareByFirstName : descCompareByFirstName)}) 
 }
 
+
 handleSortByLastName = () => {
   this.setState({
     sortOrder: this.state.sortOrder === "ASC" ? "DSC" : "ASC", 
@@ -160,6 +161,7 @@ handleSortByPhone = () => {
 
   render() {
     let searchVal = this.state.search.toLowerCase();
+    
   return (
   <div>
     <input
