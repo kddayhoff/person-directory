@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import API from "./utils/API";
 
 
-const ascCompareByName =  function(a, b) {
+const ascCompareByFirstName =  function(a, b) {
   let firstNameA = a.name.first.toUpperCase();
   let firstNameB = b.name.first.toUpperCase();
   if (firstNameA < firstNameB) {
@@ -15,7 +15,7 @@ const ascCompareByName =  function(a, b) {
   return 0;
 }
 
-const descCompareByName =  function(a, b) {
+const descCompareByFirstName=  function(a, b) {
   let firstNameA = a.name.first.toUpperCase();
   let firstNameB = b.name.first.toUpperCase();
    if (firstNameA < firstNameB) {
@@ -26,6 +26,54 @@ const descCompareByName =  function(a, b) {
    }
    return 0;
  }
+
+ const ascCompareByLastName =  function(a, b) {
+  let lastNameA = a.name.last.toUpperCase();
+  let lastNameB = b.name.last.toUpperCase();
+  if (lastNameA < lastNameB) {
+    return -1;
+  }
+  if (lastNameA > lastNameB) {
+    return 1;
+  }
+  return 0;
+}
+
+const descCompareByLastName=  function(a, b) {
+  let lastNameA = a.name.last.toUpperCase();
+  let lastNameB = b.name.last.toUpperCase();
+   if (lastNameA < lastNameB) {
+     return 1;
+   }
+   if (lastNameA > lastNameB) {
+     return -1;
+   }
+   return 0;
+ }
+
+ const ascComparedByEmail=  function(a, b) {
+  let emailA = a.email.toUpperCase();
+  let emailB = b.email.toUpperCase();
+  if (emailA < emailB) {
+    return -1;
+  }
+  if (emailA > emailB) {
+    return 1;
+  }
+  return 0;
+}
+
+const descComparedByEmail=  function(a, b) {
+  let emailA = a.email.toUpperCase();
+  let emailB = b.email.toUpperCase();
+  if (emailA < emailB) {
+    return 1;
+  }
+  if (emailA > emailB) {
+    return -1;
+  }
+  return 0;
+}
 
 // state is used when data is going to change, usually through user interaction - 
 class App extends Component {
@@ -62,10 +110,22 @@ class App extends Component {
     this.searchMovies(this.state.search);
   };
   
-  handleSortByPerson = () => {
+  handleSortByFirstName = () => {
   this.setState({
     sortOrder: this.state.sortOrder === "ASC" ? "DSC" : "ASC", 
-    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascCompareByName : descCompareByName)}) 
+    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascCompareByFirstName : descCompareByFirstName)}) 
+}
+
+handleSortByLastName = () => {
+  this.setState({
+    sortOrder: this.state.sortOrder === "ASC" ? "DSC" : "ASC", 
+    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascCompareByLastName : descCompareByLastName)}) 
+}
+
+handleSortByEmail = () => {
+  this.setState({
+    sortOrder: this.state.sortOrder === "ASC" ? "DSC" : "ASC", 
+    persons: this.state.persons.sort(this.state.sortOrder === "ASC" ? ascComparedByEmail: descComparedByEmail)}) 
 }
 
   render() {
@@ -88,9 +148,9 @@ class App extends Component {
      <thead>
       <tr>
         <th scope="col"></th> 
-        <th scope="col" onClick={this.handleSortByPerson}>First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Email</th>
+        <th scope="col" onClick={this.handleSortByFirstName}>First</th>
+        <th scope="col" onClick={this.handleSortByLastName}>Last</th>
+        <th scope="col" onClick={this.handleSortByEmail}>Email</th>
         <th scope="col">Phone Number</th>
      </tr>
     </thead>
